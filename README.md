@@ -1,6 +1,7 @@
 # sif_monitoring
 
-A new Flutter project.
+SIF monitoring app for smoke ,fire and industrial gas detection and prevention system usng iot.
+
 
 ## Getting Started
 
