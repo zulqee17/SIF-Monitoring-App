@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"sif-monitoring","appId":"1:724775724076:android:68e8b250d2efcfafc91d89","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"sif-monitoring","configurations":{"android":"1:724775724076:android:68e8b250d2efcfafc91d89","ios":"1:724775724076:ios:b066f6d7bbcae16fc91d89"}}}}}}

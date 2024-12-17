@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "724775724076",
+    "project_id": "sif-monitoring",
+    "storage_bucket": "sif-monitoring.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724775724076:android:68e8b250d2efcfafc91d89",
+        "android_client_info": {
+          "package_name": "com.example.sif_monitoring"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEfi793G0xLL9BuOkObV5j8T-31Y_Gfb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
