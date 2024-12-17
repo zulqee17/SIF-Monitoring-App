@@ -194,7 +194,7 @@ class ReusableWidgets {
               value==0?'$title Values are normal so, No worries...':'$title value is exceeded from safe limit',
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  fontSize: 30,
+                  fontSize: 30.1,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
