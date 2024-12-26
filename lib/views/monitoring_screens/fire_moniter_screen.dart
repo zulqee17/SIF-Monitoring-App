@@ -15,17 +15,18 @@ class FireMonitorScreen extends StatefulWidget {
 }
 
 class _FireMonitorScreenState extends State<FireMonitorScreen> {
-
-  final FireScreenController fireScreenController=Get.put(FireScreenController());
+  final FireScreenController fireScreenController =
+      Get.put(FireScreenController());
 
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         foregroundColor: AppColors.secoundaryColor,
-        title: Text('Fire Monitoring',style: AppTextStyles.appBarTextStyle,),
+        title: Text('Fire Monitoring', style: AppTextStyles.appBarTextStyle),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -35,47 +36,63 @@ class _FireMonitorScreenState extends State<FireMonitorScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: height*.01,),
+              SizedBox(height: height * .01),
               ReusableWidgets.headingText('Fire Monitoring Status'),
-              SizedBox(height: height*.01,),
+              SizedBox(height: height * .01),
               SizedBox(
-                height: height*.75,
+                height: height * .75,
                 child: StreamBuilder<Map>(
-                    stream: fireScreenController.getStreamData,
-                    builder: (context,snapshot){
-                      if(snapshot.connectionState==ConnectionState.waiting){
-                        return Center(child: SpinKitFadingCircle(
+                  stream: fireScreenController.getStreamData,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: SpinKitFadingCircle(
                           color: AppColors.primaryColor,
                           size: 40,
-                        ));
-                      }else{
-                        var data=snapshot.data!;
-                        fireScreenController.updateValue(data);
-                        return Column(
-                          children: [
-                            Obx((){
-                              return Card(
-                                  color: AppColors.primaryColor,
-                                  child: SizedBox(
-                                    height: height*.4,
-                                    width: double.infinity,
-                                    // ignore: unrelated_type_equality_checks
-                                    child: fireScreenController.flame1==1?Image.asset('images/flame-removebg.png'):Image.asset('images/flame-removebg-bw.png'),
-                                  )
-                              );
-                            }),
-                            SizedBox(height: height*.01,),
-                            Obx((){
-                              return ReusableWidgets.digitalValueContainer(context, 'Fire Status', fireScreenController.flame1.value);
-                            }),
-                            SizedBox(height: height*.01,),
-                            Obx((){
-                              return ReusableWidgets.fireMessageContainer(context, 'fire', fireScreenController.flame1.value);
-                            })
-                          ],
-                        );
-                      }
-                    }),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData) {
+                      return Center(child: Text('No data available.'));
+                    } else {
+                      var data = snapshot.data!;
+                      fireScreenController.updateValue(data);
+
+                      // The following Column will not be rebuilt unnecessarily
+                      return Column(
+                        children: [
+                          // The Card widget and other widgets are now updated conditionally with Obx
+                          Obx(() {
+                            return Card(
+                              color: AppColors.primaryColor,
+                              child: SizedBox(
+                                height: height * .4,
+                                width: double.infinity,
+                                child: fireScreenController.flame1.value == 1
+                                    ? Image.asset('images/flame-removebg.png')
+                                    : Image.asset(
+                                        'images/flame-removebg-bw.png'),
+                              ),
+                            );
+                          }),
+                          SizedBox(height: height * .01),
+                          Obx(() {
+                            return ReusableWidgets.digitalValueContainer(
+                                context,
+                                'Fire Status',
+                                fireScreenController.flame1.value);
+                          }),
+                          SizedBox(height: height * .01),
+                          Obx(() {
+                            return ReusableWidgets.fireMessageContainer(context,
+                                'fire', fireScreenController.flame1.value);
+                          }),
+                        ],
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),
