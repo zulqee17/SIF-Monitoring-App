@@ -44,7 +44,7 @@ class SmokeScreenController extends GetxController{
         .where('timestamp', isGreaterThanOrEqualTo: last4HourData)
         .orderBy('timestamp', descending: false)
         .snapshots()
-        .debounceTime(const Duration(seconds: 2)) // Add a debounce delay of 1 second
+        .debounceTime(const Duration(seconds: 3)) // Add a debounce delay of 1 second
         .map((snapshot) {
       final data = snapshot.docs.map((doc) => {
         'smokeValue': doc['smokeValue'],
